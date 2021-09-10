@@ -27,10 +27,8 @@ def createNote(request):
     note = Note.objects.create(
         body=data['body']
     )
-    serializer = NoteSerializer(note)
-    if serializer.is_valid():
-        serializer.save()
-    return Response("Note Created Successfully!")    
+    serializer = NoteSerializer(note, many=False)
+    return Response(serializer.data)    
 
 
 @api_view(['PUT'])
